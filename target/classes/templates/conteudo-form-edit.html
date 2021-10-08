@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Além do Pote - Editar Conteudo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous">
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-primary p-3">
+		<a class="navbar-brand text-light" href="#">Além do Pote</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Alterna navegação">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link text-light" href="/conteudo/new">Cadastrar</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-light" href="/">Listagem de conteudos</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="card text-center mx-auto mt-5"
+			style="max-width: 500px; width: 100%;">
+			<div class="card-body">
+				<div class="card-header">
+			    <h2>Editar Conteudo</h2>
+			 </div>
+				<form action="/conteudo/edit" method="post" th:object="${conteudo}">
+					<input type="hidden" name="id" th:field="*{id}"/>
+					<div class="form-group mt-3">
+						<label for="nome">Nome</label> <input class="form-control"
+							name="nome" id="nome" th:field="*{nome}">
+						<span class="form-text text-muted" th:errors="*{nome}"></span>
+					</div>
+
+					<div class="form-group mt-3">
+						<label for="quantIdealDiaria">Quantidade ideal diaria</label> 
+							<input required type="number" class="form-control" name="quantIdealDiaria" id="quantIdealDiaria" th:field="*{quantIdealDiaria}" /> 
+						<span class="form-text text-muted " th:errors="*{quantIdealDiaria}"></span>
+							
+					</div>
+
+					<button class="btn btn-primary mt-3 text-light">Atualizar Conteudo</button>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

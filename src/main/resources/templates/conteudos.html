@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Além do pote - Listagem de Conteudos</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-primary text-light p-3">
+		<a class="navbar-brand text-light" href="#">Além do Pote</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Alterna navegação">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link text-light" href="/conteudo/new">Cadastrar</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-light" href="/">Listagem de conteudos</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<table class="table table-bordered mt-5">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Quantidade ideal diaria</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+            <tbody th:each="conteudo : ${conteudos}">
+                <tr>
+                    <td th:text="${conteudo.id}"></td>
+                    <td th:text="${conteudo.nome}"></td>
+                    <td th:text="${conteudo.quantIdealDiaria}"></td>
+                    <td>
+                        <a th:href="@{/conteudo/}+${conteudo.id}" style="display:inline;" class="btn btn-warning mt-2">Editar</a>
+                            
+                        <form th:action="@{/conteudo/delete/}+${conteudo.id}" method="POST" style="display:inline;" onsubmit="confirmarDelecao(event, this)">
+	                        <button type="submit" class="btn btn-danger" >
+			 				 Remover
+							</button>
+						</form>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        
+	</div>
+	<script>
+		function confirmarDelecao(event, form){
+	        event.preventDefault()
+	        var decision = confirm("Você deseja deletar este Conteudo?")
+	        if(decision){
+	            form.submit()
+	        }
+	    }
+
+    </script>
+</body>
+</html>
